@@ -1,0 +1,74 @@
+# serverless.yml
+
+service: serverless-shorty
+
+plugins:
+    - serverless-python-individually
+
+custom:
+    tableName: shorty-table
+    pyIndividually:
+      wrap:pull: shorty-pull/handler.shorty-pull
+      wrap:create: shorty-add/handler.shorty-add
+
+provider:
+    name: aws
+    runtime: python3.7
+    stage: dev
+    region: us-west-2
+    environment:
+        BASE_URL: https://shorty.mikemiller.tech/
+        APP_URL: https://shorty.mikemiller.tech/u/
+    iamRoleStatements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+          Resource: "*"
+
+    package:
+        individually: True
+        exclude:
+          - '**/*'
+
+functions:
+    pull:
+        handler: shorty-pull/handler.lambda_handler
+        memorySize: 128
+        package:
+            include:
+                - shorty-pull/**
+        events:
+            - http: 
+                method: get
+                path: u/{short_url_id}
+    create:
+        handler: shorty-add/handler.lambda_handler
+        memorySize: 128
+        package:
+            include:
+                - shorty-add/**
+        events:
+            - http: 
+                method: post 
+                path: create
+
+resources:
+    Resources:
+        UsersDynamoDBTable:
+            Type: 'AWS::DynamoDB::Table'
+            Properties:
+                AttributeDefinitions:
+                -
+                    AttributeName: short_url_id
+                    AttributeType: S
+                KeySchema:
+                -
+                    AttributeName: short_url_id
+                    KeyType: HASH
+                ProvisionedThroughput:
+                    ReadCapacityUnits: 1
+                    WriteCapacityUnits: 1
+                TableName: ${self:custom.tableName}
