@@ -6,7 +6,8 @@ This isn't a monolith, so it's more efficiant!
 
 ## Todo
 
-This is purely an api right now. Need to get a UI for this yet.
+- This is purely an api right now. Need to get a UI for this yet.
+- Fix a packaging issue. In Lambda, the funtions are getting all files; not just handlers and reqs...
 
 ## Requirements
 
