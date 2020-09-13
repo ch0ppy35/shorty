@@ -2,6 +2,7 @@ import os
 import json
 import boto3
 import datetime
+from time import time
 from math import floor
 from string import ascii_lowercase, ascii_uppercase, digits
 
@@ -25,6 +26,11 @@ def to_base_62(num, b=62):
     return res
 
 
+def expiration_date():
+    response = int(time()) + int(432000)
+    return response
+
+
 def generate_url_id():
     seconds_since_epoch = datetime.datetime.now().timestamp()
     seconds_since_epoch = int(seconds_since_epoch)
@@ -39,12 +45,14 @@ def lambda_handler(event, context):
     short_url_id = generate_url_id()
     short_url = app_url + short_url_id
     original_url = json.loads(event.get("body")).get("original_url")
+    expiration = expiration_date()
 
     response = ddb.put_item(
         Item={
             "short_url_id": short_url_id,
             "short_url": short_url,
             "original_url": original_url,
+            "time_to_live": int(expiration),
         }
     )
 

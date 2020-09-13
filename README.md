@@ -7,7 +7,8 @@ This isn't a monolith, so it's more efficiant!
 ## Todo
 
 - This is purely an api right now. Need to get a UI for this yet.
-- Fix a packaging issue. In Lambda, the funtions are getting all files; not just handlers and reqs...
+- ~~Fix a packaging issue. In Lambda, the funtions are getting all files; not just handlers and reqs...~~
+- Stop using `time` and `datetime` in the create handler.  No need for that...Lol.
 
 ## Requirements
 

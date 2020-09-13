@@ -5,12 +5,6 @@ service: serverless-shorty
 plugins:
     - serverless-python-individually
 
-custom:
-    tableName: shorty-table
-    pyIndividually:
-      wrap:pull: shorty-pull/handler.shorty-pull
-      wrap:create: shorty-add/handler.shorty-add
-
 provider:
     name: aws
     runtime: python3.7
@@ -30,10 +24,10 @@ provider:
             - dynamodb:PutItem
           Resource: "*"
 
-    package:
-        individually: True
-        exclude:
-          - '**/*'
+package:
+    individually: True
+    exclude:
+        - '**/*'
 
 functions:
     pull:
@@ -59,9 +53,12 @@ functions:
 
 resources:
     Resources:
-        UsersDynamoDBTable:
+        RecordsTable:
             Type: 'AWS::DynamoDB::Table'
             Properties:
+                TimeToLiveSpecification:
+                    AttributeName: time_to_live
+                    Enabled: true
                 AttributeDefinitions:
                 -
                     AttributeName: short_url_id
@@ -74,3 +71,9 @@ resources:
                     ReadCapacityUnits: 1
                     WriteCapacityUnits: 1
                 TableName: ${self:custom.tableName}
+
+custom:
+    tableName: shorty-table
+    pyIndividually:
+      wrap:pull: shorty-pull/handler.shorty-pull
+      wrap:create: shorty-add/handler.shorty-add
