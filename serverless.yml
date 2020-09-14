@@ -12,6 +12,7 @@ provider:
     region: us-west-2
     stackTags:
         billingproject: ${self:service}
+    logRetentionInDays: 14
     environment:
         BASE_URL: https://shorty.mikemiller.tech/
         APP_URL: https://shorty.mikemiller.tech/u/
@@ -22,7 +23,10 @@ provider:
             - dynamodb:Scan
             - dynamodb:GetItem
             - dynamodb:PutItem
-          Resource: "*"
+          Resource:
+            Fn::GetAtt:
+                - RecordsTable
+                - Arn
 
 package:
     individually: True
