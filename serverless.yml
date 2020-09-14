@@ -1,6 +1,6 @@
 # serverless.yml
 
-service: serverless-shorty
+service: serverless-shorty-dev
 
 plugins:
     - serverless-python-individually
