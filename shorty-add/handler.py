@@ -55,5 +55,9 @@ def lambda_handler(event, context):
             "time_to_live": int(expiration),
         }
     )
+    headers = {
+      "Access-Control-Allow-Origin": "*"
+    }
+    body = '{"short_url": "' + short_url + '"}'
 
-    return {"statusCode": 200, "body": short_url}
+    return {"headers": headers, "statusCode": 200, "body": body}

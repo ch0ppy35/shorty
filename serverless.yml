@@ -44,6 +44,7 @@ functions:
             - http: 
                 method: get
                 path: u/{short_url_id}
+                cors: true
     create:
         handler: shorty-add/handler.lambda_handler
         memorySize: 128
@@ -54,6 +55,7 @@ functions:
             - http: 
                 method: post 
                 path: create
+                cors: true
 
 resources:
     Resources:

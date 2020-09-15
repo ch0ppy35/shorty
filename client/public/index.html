@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<title>Shorty</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+  body, h1 {
+    font-family: "Raleway", sans-serif;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  body, html {
+    height: 100%;
+    background-image: url(./static/wallpaper.jpg);
+  }
+  
+  .bgimg {
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+<body>
+  <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+    <div class="w3-display-topleft w3-padding-large w3-xlarge">
+      <a href="./index.html">Shorty</a>
+    </div>
+    <div class="w3-display-middle">
+      <main>
+        <section class="form-section">
+          <h4>Enter URL To Shorten</h4>
+          <form class="url-form navbar-form navbar-right">
+            <div class="form-group">
+              <input class="original-url-input" type="url" placeholder="URL.com"
+              required name="url" autofocus>
+              <button type="submit" class="submit-button">Do it!</button>
+            </div>
+          </form>
+        </section>
+        <section class="result-section"></section>
+      </main>
+    </div>
+    <div class="w3-display-bottomleft w3-padding-large">
+      <p><a href="https://github.com/ch0ppy35/">@ch0ppy35</a></p>
+    </div>
+    <div class="w3-display-bottomright w3-padding-large">
+      <p><a href="https://www.w3schools.com/w3css/w3css_templates.asp">html from w3schools CSS</a></p>
+    </div>
+  </div>
+  <script src="static/main.js"></script>
+</body>
+</html>
