@@ -1,5 +1,7 @@
 # Shorty, the serverless link shortener
 
+[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
+
 This is a serverless implementation of my [pyTinifier](https://github.com/mmillerlevels/pyTinifier) app I build a while back in Flask.
 
 This isn't a monolith, so it's more efficiant!
