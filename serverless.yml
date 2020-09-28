@@ -1,5 +1,5 @@
 # serverless.yml
-
+# Uh Change this name..Rmeove -dev...
 service: serverless-shorty-dev
 
 plugins:
@@ -8,14 +8,13 @@ plugins:
 provider:
     name: aws
     runtime: python3.7
-    stage: dev
-    region: us-west-2
+    stage: ${opt:stage, 'dev'}
+    region: ${opt:region, 'us-west-2'}
     stackTags:
         billingproject: ${self:service}
-    logRetentionInDays: 14
+    logRetentionInDays: 7
     environment:
         BASE_URL: https://shorty.mikemiller.tech/
-        APP_URL: https://shorty.mikemiller.tech/u/
     iamRoleStatements:
         - Effect: Allow
           Action:
@@ -77,6 +76,37 @@ resources:
                     ReadCapacityUnits: 1
                     WriteCapacityUnits: 1
                 TableName: ${self:custom.tableName}
+        FrontEndBucket:
+            Type: AWS::S3::Bucket
+            Properties:
+                AccessControl: PublicRead
+                BucketName: ${opt:bucketname}
+                WebsiteConfiguration:
+                    IndexDocument: index.html
+                    ErrorDocument: index.html
+        FrontEndS3BucketPolicy:
+            Type: AWS::S3::BucketPolicy
+            Properties:
+                Bucket:
+                    Ref: FrontEndBucket
+                PolicyDocument:
+                    Statement:
+                        - Sid: PublicReadGetObject
+                          Effect: Allow
+                          Principal: "*"
+                          Action:
+                          - s3:GetObject
+                          Resource:
+                            Fn::Join: [
+                            "", [
+                                "arn:aws:s3:::",
+                                {
+                                "Ref": "FrontEndBucket"
+                                },
+                                "/*"
+                                ]
+                            ]
+
 
 custom:
     tableName: shorty-table

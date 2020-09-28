@@ -8,7 +8,7 @@ from string import ascii_lowercase, ascii_uppercase, digits
 
 
 hostname = os.getenv("BASE_URL")
-app_url = os.getenv("APP_URL")
+app_url = os.getenv("BASE_URL") + "u/"
 ddb = boto3.resource("dynamodb", region_name="us-west-2").Table("shorty-table")
 
 
