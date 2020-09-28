@@ -4,7 +4,7 @@ form.addEventListener('submit', event => {
   event.preventDefault();
 
   const input = document.querySelector('.original-url-input');
-  fetch('https://shorty.mikemiller.tech/create', {
+  fetch('https://shorty.mikemiller.tech/u/create', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

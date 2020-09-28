@@ -22,7 +22,7 @@ This isn't a monolith, so it's more efficiant!
 ## Example Use
 
 ```
-$ curl -XPOST -H "Content-Type: application/json" https://shorty.mikemiller.tech/create -d '{"original_url": "https://www.serverless.com/"}'  
+$ curl -XPOST -H "Content-Type: application/json" https://shorty.mikemiller.tech/u/create -d '{"original_url": "https://www.serverless.com/"}'  
 {"short_url": "https://shorty.mikemiller.tech/u/1Ki0MT"}
 ```
 

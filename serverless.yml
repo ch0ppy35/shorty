@@ -54,7 +54,7 @@ functions:
         events:
             - http: 
                 method: post 
-                path: create
+                path: u/create
                 cors: true
 
 resources:
